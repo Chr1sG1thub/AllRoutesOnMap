@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,16 +9,24 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/2.2.0/gpx.min.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    #map { height: 600px; width: 100%; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    #map {
+      height: 600px;
+      width: 100%;
+    }
   </style>
 </head>
+
 <body>
   <div id="map"></div>
   <script>
     async function main() {
       const map = L.map('map').setView([43.0, 2.5], 8);  // Center on Occitanie approx.
-      
+
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
       }).addTo(map);
@@ -32,7 +41,7 @@
         const data = await response.json();
 
         const gpxFiles = data.filter(item => item.type === 'file' && item.name.toLowerCase().endsWith('.gpx'));
-        
+
         let allBounds = L.latLngBounds();  // To fit all routes
 
         for (const file of gpxFiles) {
@@ -40,20 +49,20 @@
             console.log(file);
             const fileResponse = await fetch(file.download_url);
             const gpxText = await fileResponse.text();
-            
-            const gpxLayer = new L.GPX(gpxText, { 
-  async: true,
-  markers: {
-    startIcon: null,
-    endIcon: null
-  }
-})
-              .on('loaded', function(e) {
+
+            const gpxLayer = new L.GPX(gpxText, {
+              async: true,
+              markers: {
+                startIcon: null,
+                endIcon: null
+              }
+            })
+              .on('loaded', function (e) {
                 const layer = e.target;
                 allBounds.extend(layer.getBounds());
                 map.fitBounds(allBounds);  // Fit after all loaded
               })
-              .on('error', function(e) {
+              .on('error', function (e) {
                 console.error('GPX load error:', e);
               })
               .addTo(map);
@@ -69,4 +78,5 @@
     main();
   </script>
 </body>
+
 </html>
