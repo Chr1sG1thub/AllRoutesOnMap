@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>All Routes On Map</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+  </style>
+</head>
+<body>
+  <script>
+///////////////////////////////////////////////////////////////////////////
+    function parseGPX(gpxText) {
+      const parser = new DOMParser();
+      const xml = parser.parseFromString(gpxText, 'application/xml');
+      const trkpts = Array.from(xml.querySelectorAll('trkpt'));
+      return trkpts.map(pt => ({
+        lat: parseFloat(pt.getAttribute('lat')),
+        lon: parseFloat(pt.getAttribute('lon'))
+      }));
+    } //function parseGPX
+
+///////////////////////////////////////////////////////////////////////////
+
+async function main() {
+
+  const owner = 'Chr1sG1thub';
+  const repo = 'TownsOnMap';
+  const path = 'gpx';
+  const branch = 'main'; // Specify branch explicitly
+
+  try {
+    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`);
+    const data = await response.json();
+
+    // Filter for GPX files only
+    const gpxFiles = data.filter(item => item.type === 'file' && item.name.toLowerCase().endsWith('.gpx'));
+
+    for (const file of gpxFiles) {
+      try {
+        
+        console.log(file);
+        
+        const fileResponse = await fetch(file.download_url);
+        const gpxText = await fileResponse.text();
+        const points = parseGPX(gpxText);
+      } catch (fileError) {
+        console.error(`Error processing ${file.name}:`, fileError);
+      }
+    }
+
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+
+    main();
+    
+  </script>
+</body>
+</html>
