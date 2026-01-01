@@ -76,10 +76,16 @@
 
           const coffeecup = L.icon({iconUrl: 'coffee.png', iconSize: [30,30], iconAnchor: [15,15]});
       
-  const cMarker = L.marker([42.64057791049862, 2.5210721155446802], {
+const cafes = [
+  { name: 'Vinça', lat: 42.640577, lon: 2.521072 },
+  { name: 'Vinça2', lat: 42.740577, lon: 2.621072 }
+];
+      forEach(cafes) {
+        const cMarker = L.marker([42.64057791049862, 2.5210721155446802], {
         icon: coffeecup,
         zIndexOffset: 1000
       }).addTo(map);
+      }
     }
 
     main();
