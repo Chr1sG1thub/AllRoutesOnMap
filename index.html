@@ -80,12 +80,13 @@ const cafes = [
   { name: 'Vinça', lat: 42.640577, lon: 2.521072 },
   { name: 'Vinça2', lat: 42.740577, lon: 2.621072 }
 ];
-      forEach(cafes) {
-        const cMarker = L.marker([42.64057791049862, 2.5210721155446802], {
-        icon: coffeecup,
-        zIndexOffset: 1000
-      }).addTo(map);
-      }
+      
+cafes.forEach(({ lat, lon }) => {
+  L.marker([lat, lon], {
+    icon: coffeecup,
+    zIndexOffset: 1000
+  }).addTo(map);
+});
     }
 
     main();
