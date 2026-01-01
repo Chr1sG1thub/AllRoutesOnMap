@@ -60,7 +60,7 @@ async function main() {
 .on('loaded', function (e) {
   const gpxLayer = e.target;
   map.fitBounds(gpxLayer.getBounds());
-}
+});
 
      } catch (fileError) {
         console.error(`Error processing ${file.name}:`, fileError);
