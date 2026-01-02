@@ -74,50 +74,61 @@
         console.error('GitHub API error:', error);
       }
 
-      const coffeecup = L.icon({ iconUrl: 'black.png', iconSize: [30, 30], iconAnchor: [15, 15] });
+      const coffeecup = L.icon({ iconUrl: coffee.png', iconSize: [30, 30], iconAnchor: [15, 15] });
+      const blackcup = L.icon({ iconUrl: 'black.png', iconSize: [30, 30], iconAnchor: [15, 15] });
 
       const cafes = [
         { name: 'Ansignan', lat: 42.7604985311888, lon: 2.51548824116038 },
-        { name: 'Argelès (CoDep)', lat: 42.5412564707832, lon: 3.04681319160621 },
-        { name: 'Baho (CoDep)', lat: 42.7011370897564, lon: 2.82145542972076 },
         { name: 'Baillestavy', lat: 42.5642452773889, lon: 2.52656352879323 },
         { name: 'Baixas', lat: 42.7490182643141, lon: 2.81044436366706 },
-        { name: 'Bompas (CoDep)', lat: 42.7355846868802, lon: 2.92951630769879 },
-        { name: 'Brouilla (CoDep)', lat: 42.5667769327528, lon: 2.89992687392439 },
         { name: 'Calce', lat: 42.7586743795036, lon: 2.7540345277013 },
-        { name: 'Canet (CoDep)', lat: 42.700077755494, lon: 3.02113258103913 },
         { name: 'Caramany', lat: 42.7349037497997, lon: 2.57078666061756 },
         { name: 'Col de la Llose', lat: 42.535723405321, lon: 2.14212389690829 },
-        { name: 'Elne (CoDep)', lat: 42.6010255828317, lon: 2.97298104141136 },
-        { name: 'Fourques', lat: 42.5816331774613, lon: 2.77897715955183 },
+       { name: 'Fourques', lat: 42.5816331774613, lon: 2.77897715955183 },
         { name: 'Latour-de-France', lat: 42.7688465372813, lon: 2.65542043556673 },
-        { name: 'Le Barcarès (CoDep)', lat: 42.800942, lon: 3.035102 },
-        { name: 'Le Boulou (CoDep)', lat: 42.5261938241821, lon: 2.8402572272644 },
         { name: 'Llauro', lat: 42.5494107672742, lon: 2.74369853207945 },
         { name: 'Llupia', lat: 42.6228251779905, lon: 2.76983561282064 },
         { name: 'Matemale', lat: 42.5872428846966, lon: 2.11977265441422 },
         { name: 'Maury', lat: 42.8101023454603, lon: 2.59173106922739 },
         { name: 'Opoul', lat: 42.8694336595007, lon: 2.87246449617477 },
-        { name: 'Palau-del-Vidre (CoDep)', lat: 42.5713210476175, lon: 2.9606634603876 },
-        { name: 'Perpignan (CoDep)', lat: 42.7063319020113, lon: 2.89105563753199 },
         { name: 'Ponteilla', lat: 42.6257670598926, lon: 2.81380983417085 },
         { name: 'Py', lat: 42.4955707564316, lon: 2.35087786574378 },
-        { name: 'Saleilles (CoDep)', lat: 42.6568179618848, lon: 2.95925886549195 },
         { name: 'Sournia', lat: 42.7277771036479, lon: 2.44313549960318 },
-        { name: 'St Cyprien (CoDep)', lat: 42.6347646756857, lon: 3.03143126558602 },
-        { name: 'St Estève (CoDep)', lat: 42.7173404932789, lon: 2.83902762191944 },
         { name: 'St Laurent de la Salanque (CoDep)', lat: 42.7791720128907, lon: 2.98083246402099 },
         { name: 'Tautavel', lat: 42.813829994083, lon: 2.74530947736345 },
         { name: 'Thuir', lat: 42.6334375349301, lon: 2.75586997723329 },
         { name: 'Thuir', lat: 42.6334643607749, lon: 2.75583123536497 },
-        { name: 'Thuir (CoDep)', lat: 42.6386138951597, lon: 2.76153794403087 },
         { name: 'Tuchan', lat: 42.8882103692736, lon: 2.71984999524485 },
         { name: 'Vernet-les-Bains', lat: 42.5473347531932, lon: 2.38972048044167 }
+      ];
+
+      const codepCafes = [
+        { name: 'Argelès (CoDep)', lat: 42.5412564707832, lon: 3.04681319160621 },
+        { name: 'Baho (CoDep)', lat: 42.7011370897564, lon: 2.82145542972076 },
+        { name: 'Bompas (CoDep)', lat: 42.7355846868802, lon: 2.92951630769879 },
+        { name: 'Brouilla (CoDep)', lat: 42.5667769327528, lon: 2.89992687392439 },
+        { name: 'Canet (CoDep)', lat: 42.700077755494, lon: 3.02113258103913 },
+        { name: 'Elne (CoDep)', lat: 42.6010255828317, lon: 2.97298104141136 },
+        { name: 'Le Barcarès (CoDep)', lat: 42.800942, lon: 3.035102 },
+        { name: 'Le Boulou (CoDep)', lat: 42.5261938241821, lon: 2.8402572272644 },
+        { name: 'Palau-del-Vidre (CoDep)', lat: 42.5713210476175, lon: 2.9606634603876 },
+        { name: 'Perpignan (CoDep)', lat: 42.7063319020113, lon: 2.89105563753199 },
+        { name: 'Saleilles (CoDep)', lat: 42.6568179618848, lon: 2.95925886549195 },
+        { name: 'St Cyprien (CoDep)', lat: 42.6347646756857, lon: 3.03143126558602 },
+        { name: 'St Estève (CoDep)', lat: 42.7173404932789, lon: 2.83902762191944 },
+        { name: 'St Laurent de la Salanque (CoDep)', lat: 42.7791720128907, lon: 2.98083246402099 },
+        { name: 'Thuir (CoDep)', lat: 42.6386138951597, lon: 2.76153794403087 }
       ];
 
       cafes.forEach(({ lat, lon }) => {
         L.marker([lat, lon], {
           icon: coffeecup,
+          zIndexOffset: 1000
+        }).addTo(map);
+      });
+      codepCafes.forEach(({ lat, lon }) => {
+        L.marker([lat, lon], {
+          icon: blackcup,
           zIndexOffset: 1000
         }).addTo(map);
       });
